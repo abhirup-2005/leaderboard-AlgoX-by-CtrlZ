@@ -163,22 +163,47 @@ h1 {
 /* ================================================================
    TOP 3 COLORS
 ================================================================ */
+/* --- TOP 3 COLORS (Shiny Metallic Text) --- */
 .top1 .rank,
 .top1 .name,
 .top1 .score {
-    color: gold;
+  font-weight: 900;
+  background: linear-gradient(90deg, #b6862c, #ffecb3, #d4af37, #b6862c);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
 }
 
 .top2 .rank,
 .top2 .name,
 .top2 .score {
-    color: silver;
+  font-weight: 900;
+  background: linear-gradient(90deg, #b8b8b8, #ffffff, #c0c0c0, #8c8c8c);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
 }
 
 .top3 .rank,
 .top3 .name,
 .top3 .score {
-    color: #cd7f32;
+  font-weight: 900;
+  background: linear-gradient(90deg, #7c3f00, #b87333, #d27d2d, #ffb07c, #7c3f00);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+}
+
+/* shared shine animation */
+@keyframes shine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 /* ================================================================
