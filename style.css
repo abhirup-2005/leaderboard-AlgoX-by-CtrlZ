@@ -142,7 +142,7 @@ h1 {
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
 }
 
 .score {
@@ -154,7 +154,7 @@ h1 {
 .time {
     flex: 0 1 auto;
     min-width: 70px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: #bbb;
     text-align: right;
 
@@ -192,7 +192,7 @@ h1 {
     z-index: 1000;
 
     background: rgba(25, 25, 25, 0.95);
-    padding: 8px 20px;
+    padding: 5px 20px;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.4);
 }
 
@@ -223,8 +223,39 @@ h1 {
 /* ================================================================
    MOBILE RESPONSIVE STYLES
 ================================================================ */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     #leaderboard {
         width: 85vw;
+    }
+
+    .time {
+        width: 80px;
+    }
+    
+    #logo {
+        display: flex;
+        gap: 5px;
+    }
+
+    #logo-img {
+        width: 50px;
+    }
+
+    #logo-txt {
+        font-size: 1.1rem;
+        width: 98px;
+        align-self: flex-end;
+        text-align: left;
+    }
+
+    #links {
+        display: flex;
+        gap: 16px;
+        list-style: none;
+    }
+
+    .social {
+        width: 27px;
+        border-radius: 9px;
     }
 }
