@@ -48,6 +48,9 @@ async function fetchLeaderboard() {
     const tsIndex = headers.findIndex(h => h.toLowerCase().includes("timestamp"));
     const nameIndex = headers.findIndex(h => h.toLowerCase().includes("name"));
     const scoreIndex = headers.findIndex(h => h.toLowerCase().includes("score"));
+    
+    // --- 1. FIND NEW COLUMN ---
+    const urlIndex = headers.findIndex(h => h.toLowerCase().includes("profile"));
 
     if (tsIndex === -1 || nameIndex === -1 || scoreIndex === -1) {
       throw new Error("Missing required columns (Timestamp, Name, Score)");
@@ -58,6 +61,8 @@ async function fetchLeaderboard() {
         name: r[nameIndex]?.trim(),
         score: parseFloat(r[scoreIndex]) || 0,
         timestamp: new Date(r[tsIndex]),
+        // --- 2. READ NEW URL ---
+        profileUrl: r[urlIndex]?.trim()
       }))
       .filter(e => e.name && !isNaN(e.timestamp));
 
@@ -69,6 +74,8 @@ async function fetchLeaderboard() {
           name: entry.name,
           totalScore: entry.score,
           lastTime: entry.timestamp,
+          // --- 3. STORE NEW URL ---
+          profileUrl: entry.profileUrl
         });
       } else {
         const existing = playerMap.get(entry.name);
@@ -85,7 +92,7 @@ async function fetchLeaderboard() {
       return a.lastTime - b.lastTime;
     });
 
-    // Render leaderboard
+    // --- 4. RENDER THE LINK ---
     leaderboard.innerHTML = data.map((entry, index) => {
       const formattedTime = entry.lastTime.toLocaleString("en-IN", {
         hour: "2-digit",
@@ -94,10 +101,19 @@ async function fetchLeaderboard() {
         day: "2-digit",
         month: "short",
       });
+      
+      // Check if a valid URL exists
+      const hasUrl = entry.profileUrl && entry.profileUrl.startsWith('http');
+      
+      // Create the name HTML
+      const nameHtml = hasUrl
+        ? `<a href="${entry.profileUrl}" target="_blank" rel="noopener noreferrer">${entry.name}</a>`
+        : entry.name; // Just show text if no URL
+
       return `
         <div class="entry ${index === 0 ? "top1" : index === 1 ? "top2" : index === 2 ? "top3" : ""}">
           <span class="rank">${index + 1}.</span>
-          <span class="name">${entry.name}</span>
+          <span class="name">${nameHtml}</span>
           <span class="score">${entry.totalScore}</span>
           <span class="time">${formattedTime}</span>
         </div>
