@@ -284,3 +284,16 @@ h1 {
         border-radius: 8px;
     }
 }
+
+/* ================================================================
+   LINK STYLING (FOR PROFILE URLS)
+================================================================ */
+.name a {
+    color: inherit; /* This makes the link inherit the top1/2/3 shiny colors */
+    text-decoration: none; /* Removes the default underline */
+    display: block; /* Ensures the link fills the .name span area */
+}
+
+.name a:hover {
+    text-decoration: underline; /* Adds the underline back on hover (optional, but good) */
+}
